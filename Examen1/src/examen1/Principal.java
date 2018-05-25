@@ -468,9 +468,9 @@ public class Principal extends javax.swing.JFrame {
     private void EnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EnterMouseClicked
         // TODO add your handling code here:
         String tokens[] = ta_cmd.getText().split(" ");
-        switch(tokens[0]) {
+        switch (tokens[0]) {
             case "class":
-                switch(tokens[1]){
+                switch (tokens[1]) {
                     case "create":
                         useractual.getClases().add(new clases(tokens[2]));
                         ta_cmd.setText("Clase Creada Exitosamente");
@@ -478,7 +478,7 @@ public class Principal extends javax.swing.JFrame {
                     case "modify":
                         String tmp = tokens[2];
                         for (int i = 0; i < useractual.getClases().size(); i++) {
-                            if(tmp.equals(useractual.getClases().get(i).getName())){
+                            if (tmp.equals(useractual.getClases().get(i).getName())) {
                                 useractual.getClases().get(i).setName(tokens[4]);
                                 i = useractual.getClases().size();
                             }
@@ -486,16 +486,50 @@ public class Principal extends javax.swing.JFrame {
                         ta_cmd.setText("Clase Modificada exitosamente");
                         break;
                     case "delete":
-                        for (int i = 0; i < useractual.getClases().size(); i++) {                      
-                            if(tokens[2].equals(useractual.getClases().get(i).getName())){
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[2].equals(useractual.getClases().get(i).getName())) {
                                 useractual.getClases().remove(i);
                             }
                         }
                         ta_cmd.setText("Clase eliminada exitosamente");
                 }
-                
+
                 break;
-            
+            case "atribute":
+                switch (tokens[1]) {
+                    case "add":
+                        int tmp = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[3].equals(useractual.getClases().get(i).getName())) {
+                                tmp = i;
+                                i = useractual.getClases().size();
+                            }
+                        }
+                        tokens[4] = tokens[4].substring(1);
+                        tokens[5] = tokens[5].substring(0, tokens[5].length() - 1);
+                        useractual.getClases().get(tmp).getAtributos().add(tokens[4] + " " + tokens[5]);
+                        ta_cmd.setText("Atributo agregado exitosamente");
+                        break;
+                    case "modify":
+                        int tmp2 = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[3].equals(useractual.getClases().get(i).getName())) {
+                                tmp2 = i;
+                                i = useractual.getClases().size();
+                            }
+                        }
+                            tokens[4] = tokens[4].substring(1);
+                        for (int i = 0; i < useractual.getClases().get(tmp2).getAtributos().size(); i++) {
+                            if((tokens[4] + " " + tokens[5]).equals(useractual.getClases().get(tmp2).getAtributos().get(i))){
+                                tokens[8] = tokens[8].substring(0,tokens[8].length()-1);
+                                useractual.getClases().get(tmp2).getAtributos().set(i, tokens[7] + " " + tokens[8]);
+                                i = useractual.getClases().get(tmp2).getAtributos().size();
+                            }
+                        }
+                        ta_cmd.setText("Atributo modificado exitosamente");
+                        break;
+                }
+                break;
         }
     }//GEN-LAST:event_EnterMouseClicked
 
@@ -505,8 +539,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

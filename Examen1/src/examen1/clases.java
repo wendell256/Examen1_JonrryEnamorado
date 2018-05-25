@@ -38,6 +38,8 @@ public class clases {
 
     public void setName(String name) {
         this.name = name;
+        metodos = new ArrayList();
+        atributos = new ArrayList();
     }
 
     public ArrayList getMetodos() {
