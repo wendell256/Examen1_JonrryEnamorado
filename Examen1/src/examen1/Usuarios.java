@@ -28,6 +28,7 @@ public class Usuarios {
         this.clases = clases;
     }
 
+    
     public Usuarios() {
         clases = new ArrayList();
     }

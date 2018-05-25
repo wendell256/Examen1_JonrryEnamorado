@@ -11,48 +11,30 @@ import java.util.ArrayList;
  *
  * @author wende
  */
-public class clases {
+public class metodos {
 
     private String name;
-    private ArrayList<metodos> metodos;  
     private ArrayList<String> atributos;
-    private boolean toString;
+    private String cuerpo;
 
-    public clases(String name) {
+    public metodos(String name) {
         this.name = name;
-        metodos = new ArrayList();
         atributos = new ArrayList();
     }
 
-    public clases(String name, ArrayList metodos, ArrayList<String> atributos, boolean toString) {
+    public metodos(String name, ArrayList<String> atributos, String cuerpo) {
         this.name = name;
-        this.metodos = metodos;
         this.atributos = atributos;
-        this.toString = toString;
-    }
-
-    public clases() {
-    
+        this.cuerpo = cuerpo;
     }
 
     public String getName() {
         return name;
-        
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    public ArrayList<metodos> getMetodos() {
-        return metodos;
-    }
-
-    public void setMetodos(ArrayList<metodos> metodos) {
-        this.metodos = metodos;
-    }
-    
-    
 
     public ArrayList<String> getAtributos() {
         return atributos;
@@ -62,20 +44,17 @@ public class clases {
         this.atributos = atributos;
     }
 
-    public boolean isToString() {
-        return toString;
+    public String getCuerpo() {
+        return cuerpo;
     }
 
-    public void setToString(boolean toString) {
-        this.toString = toString;
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
     }
 
     @Override
     public String toString() {
-        return "clases{" + "name=" + name + ", metodos=" + metodos + ", atributos=" + atributos + ", toString=" + toString + '}';
+        return "metodos{" + "name=" + name + ", atributos=" + atributos + ", cuerpo=" + cuerpo + '}';
     }
-
-    
-    
 
 }

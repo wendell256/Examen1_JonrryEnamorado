@@ -19,8 +19,13 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
+        System.out.println("class create clase");
+        System.out.println("class modify clase to clase2");
+        System.out.println("class delete clase2\n");
+        System.out.println("atribute add to clase (String name)");
+        System.out.println("atribute modify from clase (String name to int Age)");
+        System.out.println("atribute delete from clase (int Age)");
         initComponents();
-
         setLocationRelativeTo(this);
     }
 
@@ -518,15 +523,99 @@ public class Principal extends javax.swing.JFrame {
                                 i = useractual.getClases().size();
                             }
                         }
-                            tokens[4] = tokens[4].substring(1);
+                        tokens[4] = tokens[4].substring(1);
                         for (int i = 0; i < useractual.getClases().get(tmp2).getAtributos().size(); i++) {
-                            if((tokens[4] + " " + tokens[5]).equals(useractual.getClases().get(tmp2).getAtributos().get(i))){
-                                tokens[8] = tokens[8].substring(0,tokens[8].length()-1);
+                            if ((tokens[4] + " " + tokens[5]).equals(useractual.getClases().get(tmp2).getAtributos().get(i))) {
+                                tokens[8] = tokens[8].substring(0, tokens[8].length() - 1);
                                 useractual.getClases().get(tmp2).getAtributos().set(i, tokens[7] + " " + tokens[8]);
                                 i = useractual.getClases().get(tmp2).getAtributos().size();
                             }
                         }
                         ta_cmd.setText("Atributo modificado exitosamente");
+                        break;
+                    case "delete":
+                        int tmp3 = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[3].equals(useractual.getClases().get(i).getName())) {
+                                tmp3 = i;
+                                i = useractual.getClases().size();
+                            }
+                        }
+                        tokens[4] = tokens[4].substring(1);
+                        tokens[5] = tokens[5].substring(0, tokens[5].length() - 1);
+                        useractual.getClases().get(tmp3).getAtributos().remove(tokens[4] + " " + tokens[5]);
+                        ta_cmd.setText("Atributo eliminado exitosamente");
+                        break;
+
+                }
+                break;
+            case "method":
+                switch (tokens[1]) {
+                    case "add":
+                        tokens[2] = tokens[2].substring(1);
+                        tokens[4] = tokens[4].substring(0, tokens[4].length() - 1);
+                        String met = tokens[2] + " " + tokens[3] + " " + tokens[4];
+                        int tmp4 = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[6].equals(useractual.getClases().get(i).getName())) {
+                                tmp4 = i;
+                                i = useractual.getClases().size();
+                            }
+                        }
+                        useractual.getClases().get(tmp4).getMetodos().add(new metodos(met));
+                        ta_cmd.setText("Metodo agregado exitosamente");
+                        break;
+                    case "atribute":
+                        switch (tokens[2]) {
+                            case "add":
+                                tokens[3] = tokens[3].substring(1);
+                                tokens[4] = tokens[4].substring(0, tokens[4].length() - 1);
+                                String t = tokens[3] +" "+ tokens[4];
+                                int tmp5 = useractual.getClases().size();
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (tokens[10].equals(useractual.getClases().get(i).getName())) {
+                                        tmp5 = i;
+                                        i = useractual.getClases().size();
+                                    }
+                                }
+                                int tmp6 = useractual.getClases().get(tmp5).getMetodos().size();
+                                for (int i = 0; i < useractual.getClases().get(tmp5).getMetodos().size(); i++) {
+                                    if (tokens[7].equals(useractual.getClases().get(tmp5).getMetodos().get(i).getName())) {
+                                        tmp6 = i;
+                                        i = useractual.getClases().get(tmp5).getMetodos().size();
+                                    }
+                                }
+                                useractual.getClases().get(tmp5).getMetodos().get(tmp6).getAtributos().add(t);
+                                break;
+                            case "modify":
+                                tokens[3] = tokens[3].substring(1);                                
+                                String old = tokens[3] + tokens[4];
+                                tokens[7] = tokens[7].substring(0, tokens[7].length() - 1);
+                                String nuevo = tokens[6]+ " " + tokens[7];
+                                int tmp7 = useractual.getClases().size();
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (tokens[13].equals(useractual.getClases().get(i).getName())) {
+                                        tmp7 = i;
+                                        i = useractual.getClases().size();
+                                    }
+                                }
+                                int tmp8 = useractual.getClases().get(tmp7).getMetodos().size();
+                                for (int i = 0; i < useractual.getClases().get(tmp7).getMetodos().size(); i++) {
+                                    if (tokens[10].contains(useractual.getClases().get(tmp7).getMetodos().get(i).getName())) {
+                                        tmp8 = i;
+                                        i = useractual.getClases().get(tmp7).getMetodos().size();
+                                    }
+                                }
+                                int tmp9 = useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().size();
+                                for (int i = 0; i < useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().size(); i++) {
+                                    if (old.equals(useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().get(i))) {
+                                        tmp9 = i;
+                                        i = useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().size();
+                                    }
+                                }
+                                useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().set(tmp9, nuevo);
+                                break;
+                        }
                         break;
                 }
                 break;
