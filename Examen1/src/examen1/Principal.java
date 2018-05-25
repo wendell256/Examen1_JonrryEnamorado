@@ -570,7 +570,7 @@ public class Principal extends javax.swing.JFrame {
                             case "add":
                                 tokens[3] = tokens[3].substring(1);
                                 tokens[4] = tokens[4].substring(0, tokens[4].length() - 1);
-                                String t = tokens[3] +" "+ tokens[4];
+                                String t = tokens[3] + " " + tokens[4];
                                 int tmp5 = useractual.getClases().size();
                                 for (int i = 0; i < useractual.getClases().size(); i++) {
                                     if (tokens[10].equals(useractual.getClases().get(i).getName())) {
@@ -580,18 +580,19 @@ public class Principal extends javax.swing.JFrame {
                                 }
                                 int tmp6 = useractual.getClases().get(tmp5).getMetodos().size();
                                 for (int i = 0; i < useractual.getClases().get(tmp5).getMetodos().size(); i++) {
-                                    if (tokens[7].equals(useractual.getClases().get(tmp5).getMetodos().get(i).getName())) {
+                                    if (useractual.getClases().get(tmp5).getMetodos().get(i).getName().contains(tokens[7])) {
                                         tmp6 = i;
                                         i = useractual.getClases().get(tmp5).getMetodos().size();
                                     }
                                 }
                                 useractual.getClases().get(tmp5).getMetodos().get(tmp6).getAtributos().add(t);
+                                ta_cmd.setText("Atributo agregado a metodo exitosamente!");
                                 break;
                             case "modify":
-                                tokens[3] = tokens[3].substring(1);                                
+                                tokens[3] = tokens[3].substring(1);
                                 String old = tokens[3] + tokens[4];
                                 tokens[7] = tokens[7].substring(0, tokens[7].length() - 1);
-                                String nuevo = tokens[6]+ " " + tokens[7];
+                                String nuevo = tokens[6] + " " + tokens[7];
                                 int tmp7 = useractual.getClases().size();
                                 for (int i = 0; i < useractual.getClases().size(); i++) {
                                     if (tokens[13].equals(useractual.getClases().get(i).getName())) {
@@ -601,7 +602,7 @@ public class Principal extends javax.swing.JFrame {
                                 }
                                 int tmp8 = useractual.getClases().get(tmp7).getMetodos().size();
                                 for (int i = 0; i < useractual.getClases().get(tmp7).getMetodos().size(); i++) {
-                                    if (tokens[10].contains(useractual.getClases().get(tmp7).getMetodos().get(i).getName())) {
+                                    if (useractual.getClases().get(tmp7).getMetodos().get(i).getName().contains(tokens[10])) {
                                         tmp8 = i;
                                         i = useractual.getClases().get(tmp7).getMetodos().size();
                                     }
@@ -614,8 +615,31 @@ public class Principal extends javax.swing.JFrame {
                                     }
                                 }
                                 useractual.getClases().get(tmp7).getMetodos().get(tmp8).getAtributos().set(tmp9, nuevo);
+                                ta_cmd.setText("Metodo modificado exitosamente!");
+                                break;
+                            case "delete":
+                                tokens[3] = tokens[3].substring(1);
+                                tokens[4] = tokens[4].substring(0, tokens[4].length() - 1);
+                                String del = tokens[3] + " " + tokens[4];
+                                int tmp10 = useractual.getClases().size();
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (tokens[10].equals(useractual.getClases().get(i).getName())) {
+                                        tmp10 = i;
+                                        i = useractual.getClases().size();
+                                    }
+                                }
+                                int tmp11 = useractual.getClases().get(tmp10).getMetodos().size();
+                                for (int i = 0; i < useractual.getClases().get(tmp10).getMetodos().size(); i++) {
+                                    if ((useractual.getClases().get(tmp10).getMetodos().get(i).getName()).contains(tokens[7])) {
+                                        tmp11 = i;
+                                        i = useractual.getClases().get(tmp10).getMetodos().size();
+                                    }
+                                }
+                                useractual.getClases().get(tmp10).getMetodos().get(tmp11).getAtributos().remove(del);
+                                ta_cmd.setText("Atributo eliminado de metodo exitosamente!");
                                 break;
                         }
+                        
                         break;
                 }
                 break;
