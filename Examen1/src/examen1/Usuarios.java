@@ -83,7 +83,7 @@ public class Usuarios {
     }
     @Override
     public String toString() {
-        return "Usuarios{" + "nombre=" + nombre + ", edad=" + edad + ", correo=" + correo + ", user=" + user + ", pass=" + pass + ", clases=" + clases + '}';
+        return "clases=" + clases + '}';
     }
 
 }

@@ -54,6 +54,10 @@ public class Principal extends javax.swing.JFrame {
         jd_logeado = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         vercod = new javax.swing.JTextArea();
@@ -197,15 +201,45 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("User:");
+
+        jLabel10.setText("Pass: ");
+
+        jTextField1.setEditable(false);
+        jTextField1.setText(useractual.getUser());
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(412, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Perfil", jPanel1);
@@ -497,6 +531,63 @@ public class Principal extends javax.swing.JFrame {
                             }
                         }
                         ta_cmd.setText("Clase eliminada exitosamente");
+                        break;
+                    case "constructor":
+                        switch (tokens[2]) {
+                            case "add":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[4])) {
+                                        useractual.getClases().get(i).setCons(useractual.getClases().get(i).getName() + "(){"
+                                                + useractual.getClases().get(i).getAtributos() + "}");
+                                    }
+                                }
+                                break;
+                            case "delete":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[4])) {
+                                        useractual.getClases().get(i).setCons("");
+                                    }
+                                }
+                                break;
+                        }
+                        break;
+                    case "empty":
+                        switch (tokens[3]) {
+                            case "add":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[5])) {
+                                        useractual.getClases().get(i).setEmptycons(useractual.getClases().get(i).getName() + "(){}");
+                                    }
+                                }
+                                break;
+                            case "delete":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[5])) {
+                                        useractual.getClases().get(i).setEmptycons("");
+                                    }
+                                }
+                                break;
+                        }
+                        break;
+                    case "toString":
+                        switch (tokens[2]) {
+                            case "add":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[4])) {
+                                    useractual.getClases().get(i).setToString(true);
+                                    }
+                                }
+                                break;
+                            case "remove":
+                                for (int i = 0; i < useractual.getClases().size(); i++) {
+                                    if (useractual.getClases().get(i).getName().equals(tokens[4])) {
+                                    useractual.getClases().get(i).setToString(false);
+                                    }
+                                }
+
+                                break;
+                        }
+                        break;
                 }
 
                 break;
@@ -639,7 +730,38 @@ public class Principal extends javax.swing.JFrame {
                                 ta_cmd.setText("Atributo eliminado de metodo exitosamente!");
                                 break;
                         }
-                        
+                        break;
+                    case "modify":
+                        int tmp12 = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[4].equals(useractual.getClases().get(i).getName())) {
+                                tmp12 = i;
+                                i = useractual.getClases().size();
+                            }
+                        }
+
+                        for (int i = 0; i < 10; i++) {
+                            
+                        }
+                        break;
+                    case "delete":
+                        int tmp13 = useractual.getClases().size();
+                        for (int i = 0; i < useractual.getClases().size(); i++) {
+                            if (tokens[4].equals(useractual.getClases().get(i).getName())) {
+                                tmp13 = i;
+                                i = useractual.getClases().size();
+                            }
+
+                        }
+                        int tmp14 = useractual.getClases().get(tmp13).getMetodos().size();
+                        for (int i = 0; i < useractual.getClases().get(tmp13).getMetodos().size(); i++) {
+                            if ((useractual.getClases().get(tmp13).getMetodos().get(i).getName()).contains(tokens[5])) {
+                                tmp14 = i;
+                                i = useractual.getClases().get(tmp13).getMetodos().size();
+                            }
+                        }
+                        useractual.getClases().get(tmp13).getMetodos().remove(tmp14);
+                        ta_cmd.setText("Metodo eliminado exitosamente!");
                         break;
                 }
                 break;
@@ -648,8 +770,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
-        System.out.println(useractual);
+        
+        vercod.setText(useractual.toString());
     }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -693,6 +820,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -700,12 +828,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JDialog jd_logeado;
     private javax.swing.JDialog jd_registrar;
     private javax.swing.JTextArea ta_cmd;

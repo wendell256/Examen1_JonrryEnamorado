@@ -17,6 +17,8 @@ public class clases {
     private ArrayList<metodos> metodos;  
     private ArrayList<String> atributos;
     private boolean toString;
+    private String cons;
+    private String emptycons;
 
     public clases(String name) {
         this.name = name;
@@ -33,6 +35,22 @@ public class clases {
 
     public clases() {
     
+    }
+
+    public String getCons() {
+        return cons;
+    }
+
+    public void setCons(String cons) {
+        this.cons = cons;
+    }
+
+    public String getEmptycons() {
+        return emptycons;
+    }
+
+    public void setEmptycons(String emptycons) {
+        this.emptycons = emptycons;
     }
 
     public String getName() {
