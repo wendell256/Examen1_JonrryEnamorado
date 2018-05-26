@@ -30,8 +30,11 @@ public class Principal extends javax.swing.JFrame {
         System.out.println("atribute add to clase (String name)");
         System.out.println("atribute modify from clase (String name to int Age)");
         System.out.println("atribute delete from clase (int Age)");
+        System.out.println("");
         System.out.println("method add (public void add) to gato");
         System.out.println("method atribute add (int x) to method add to class gato");
+        System.out.println("method atribute delete (int x) to method add to class gato");
+        System.out.println("method atribute modify (int x to int y) from method add from class gato");
         initComponents();
         setLocationRelativeTo(this);
     }
