@@ -19,12 +19,19 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
-        System.out.println("class create clase");
-        System.out.println("class modify clase to clase2");
-        System.out.println("class delete clase2\n");
+        System.out.println("class create perro");
+        System.out.println("class modify perro to gato");
+        System.out.println("class empty constructor add to gato");
+        System.out.println("class empty constructor delete to gato");
+        System.out.println("class constructor add to gato");
+        System.out.println("class constructor delete to gato");
+        System.out.println("class delete gato");
+        System.out.println("");
         System.out.println("atribute add to clase (String name)");
         System.out.println("atribute modify from clase (String name to int Age)");
         System.out.println("atribute delete from clase (int Age)");
+        System.out.println("method add (public void add) to gato");
+        System.out.println("method atribute add (int x) to method add to class gato");
         initComponents();
         setLocationRelativeTo(this);
     }
